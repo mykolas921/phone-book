@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  max-width: 900px;
-  margin: 0 auto;
   margin-top: 1.5rem;
 `;
 export const Row = styled.div`
