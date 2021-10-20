@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import ContactForm from "./components/ContactForm";
 
 function App() {
+  const [contactList, setContactList] = useState([]);
+
+  const handleSubmit = (contact) => {
+    setContactList([...contactList, contact]);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Phone Book App</h1>
+      <hr />
+      <ContactForm onSubmit={handleSubmit} />
     </div>
   );
 }
