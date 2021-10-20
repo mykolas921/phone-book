@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "./App.css";
 import ContactForm from "./components/ContactForm";
+import ContactList from "./components/ContactList";
 
 function App() {
-  const [contactList, setContactList] = useState([]);
+  const [contacts, setContacts] = useState([]);
 
   const handleSubmit = (contact) => {
-    setContactList([...contactList, contact]);
+    setContacts([...contacts, contact]);
   };
 
   return (
@@ -14,6 +15,7 @@ function App() {
       <h1>Phone Book App</h1>
       <hr />
       <ContactForm onSubmit={handleSubmit} />
+      <ContactList contacts={contacts} />
     </div>
   );
 }

@@ -22,25 +22,39 @@ describe("ContactForm", () => {
     expect(onSubmit).not.toHaveBeenCalled();
   });
 
-  it("submit contact if all input has value", () => {
+  it("submit contact if all input has value and clear form", () => {
+    const testContact = {
+      firstName: "Mykolas",
+      lastName: "Kvieska",
+      phoneNumber: "123123",
+    };
     const onSubmit = jest.fn();
     const { getByPlaceholderText, getByText } = render(
       <ContactForm onSubmit={onSubmit} />
     );
-    fireEvent.change(getByPlaceholderText(/first name/i), {
-      target: { value: "First" },
+    const firstNameInput = getByPlaceholderText(/first name/i);
+    fireEvent.change(firstNameInput, {
+      target: { value: testContact.firstName },
     });
-    fireEvent.change(getByPlaceholderText(/last name/i), {
-      target: { value: "Last" },
+    expect(firstNameInput.value).toBe(testContact.firstName);
+
+    const lastNameInput = getByPlaceholderText(/last name/i);
+    fireEvent.change(lastNameInput, {
+      target: { value: testContact.lastName },
     });
-    fireEvent.change(getByPlaceholderText(/phone #/i), {
-      target: { value: "123" },
+    expect(lastNameInput.value).toBe(testContact.lastName);
+
+    const phoneNumberInput = getByPlaceholderText(/phone #/i);
+    fireEvent.change(phoneNumberInput, {
+      target: { value: testContact.phoneNumber },
     });
+    expect(phoneNumberInput.value).toBe(testContact.phoneNumber);
+
     fireEvent.click(getByText("Add"), {});
-    expect(onSubmit).toHaveBeenCalledWith({
-      firstName: "First",
-      lastName: "Last",
-      phoneNumber: "123",
-    });
+    expect(onSubmit).toHaveBeenCalledWith(testContact);
+
+    expect(firstNameInput.value).toBe("");
+    expect(lastNameInput.value).toBe("");
+    expect(phoneNumberInput.value).toBe("");
   });
 });

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import * as Styled from "./ContactForm.styled";
 
+const INITIAL = {
+  firstName: "",
+  lastName: "",
+  phoneNumber: "",
+};
 const ContactForm = ({ onSubmit }) => {
-  const [contact, setContact] = useState({
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-  });
+  const [contact, setContact] = useState(INITIAL);
 
   const handleChange = (fieldName) => (e) =>
     setContact({ ...contact, [fieldName]: e.target.value });
@@ -17,6 +18,7 @@ const ContactForm = ({ onSubmit }) => {
     if (!contact.firstName || !contact.lastName || !contact.phoneNumber) return;
 
     onSubmit(contact);
+    setContact(INITIAL);
   };
   return (
     <Styled.Form onSubmit={handleSubmit}>
