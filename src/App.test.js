@@ -9,7 +9,7 @@ describe("App", () => {
   });
 
   it("filter works properly", () => {
-    const { getByPlaceholderText, getByText } = render(<App />);
+    render(<App />);
     const input1 = screen.getByPlaceholderText(/First Name/i);
     const input2 = screen.getByPlaceholderText(/Last Name/i);
     const input3 = screen.getByPlaceholderText(/Phone #/i);
@@ -54,5 +54,13 @@ describe("App", () => {
     setSearchVal("Mykolas 123");
     checkContactExist("Mykolas Kvieska 12345");
     checkContactNotExist("John Norman 67890");
+
+    addContact("Ralph Ross 1234");
+    checkContactExist("Ralph Ross 1234");
+
+    setSearchVal("");
+    checkContactExist("Mykolas Kvieska 12345");
+    checkContactExist("John Norman 67890");
+    checkContactExist("Ralph Ross 1234");
   });
 });
