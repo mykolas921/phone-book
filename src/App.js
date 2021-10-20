@@ -35,7 +35,11 @@ function App() {
       <ContactForm onSubmit={handleSubmit} />
       <Styled.SearchContainer>
         <label>Search</label>
-        <input value={search} onChange={(e) => setSearch(e.target.value)} />
+        <input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="search"
+        />
       </Styled.SearchContainer>
       <ContactList contacts={filteredContacts} />
     </Styled.AppContainer>
